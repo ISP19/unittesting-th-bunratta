@@ -1,6 +1,6 @@
 ## Unit Testing Assignment
 
-by Bill Gates.
+by T. Bunratta.
 
 
 ## Test Cases for unique
@@ -19,3 +19,5 @@ Write a table describing your test cases.
 
 
 ## Test Cases for Fraction
+| Test case              |  Expected Result    |
+|------------------------|---------------------|

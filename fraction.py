@@ -1,3 +1,6 @@
+import math
+
+
 class Fraction:
     """A fraction with a numerator and denominator and arithmetic operations.
 
@@ -12,10 +15,15 @@ class Fraction:
         """Initialize a new fraction with the given numerator
            and denominator (default 1).
         """
-        #TODO write this (and remove this TODO comment)
-        self.numerator = numerator
-        self.denominator = denominator
-        pass
+        gcd = math.gcd(numerator, denominator)
+        if denominator == 0:
+            raise ValueError("A fraction cannot have a denominator of zero")
+        self.numerator = int(numerator / gcd)
+        self.denominator = int(denominator / gcd)
+        if self.denominator < 0 or self.numerator == 0:
+            if self.denominator < 0:
+                self.numerator *= -1
+                self.denominator *= -1
 
     def __add__(self, frac):
         """Return the sum of two fractions as a new fraction.
@@ -29,7 +37,7 @@ class Fraction:
         other.numerator *= -1
         return self.__add__(other)
 
-    #TODO write __mul__ and __str__.  Verify __eq__ works with your code.
+    #TODO write __mul__.  Verify __eq__ works with your code.
     #Optional have fun and overload other operators such as 
     # __sub__ for f-g
     # __gt__  for f > g
@@ -41,3 +49,9 @@ class Fraction:
            is unique (3/6 is the same as 1/2).
         """
         return self.numerator/self.denominator == frac.numerator/frac.denominator
+
+    def __str__(self):
+        if self.denominator == 1:
+            return f"{self.numerator}"
+        else:
+            return f"{self.numerator}/{self.denominator}"
