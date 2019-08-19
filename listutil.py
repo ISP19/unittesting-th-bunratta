@@ -29,18 +29,16 @@ def unique(lst):
     """
     if type(lst) is not list:
         raise InvalidTypeException()
-    freq_list = {}
+    freq_list = []
     for item in lst:
         if item not in freq_list:
-            freq_list.update({item: 1})
-        else:
-            freq_list[item] += 1
-    return list(freq_list.keys())
+            freq_list.append(item)
+    return list(freq_list)
 
 
 if __name__ == "__main__":
     """Run the doctests in all methods."""
     # from random import randint
-    # print([randint(0, 22) for i in range(1000)])
+    # print([randint(0, 22) for i in range(10000)])
     import doctest
     doctest.testmod(verbose=True)

@@ -31,7 +31,7 @@ class FractionTest(unittest.TestCase):
     # The test requires that your __eq__ is correct.
     def test_add(self):
         # 3/4 = 2/3 + 1/12
-        self.assertEqual(Fraction(3,4), Fraction(1,12)+Fraction(2,3))
+        self.assertAlmostEqual(Fraction(3, 4), Fraction(1, 12) + Fraction(2, 3))
 
     def test_eq(self):
         f = Fraction(1,2)
