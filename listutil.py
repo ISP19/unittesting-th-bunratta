@@ -9,7 +9,7 @@ class InvalidTypeException(Exception):
 
 
 def unique(lst):
-    """Return a list containing only the first occurence of each distint
+    """Return a list containing only the first occurrence of each distinct
        element in list.  That is, all duplicates are omitted.
 
     Arguments:
@@ -40,5 +40,7 @@ def unique(lst):
 
 if __name__ == "__main__":
     """Run the doctests in all methods."""
+    # from random import randint
+    # print([randint(0, 22) for i in range(1000)])
     import doctest
     doctest.testmod(verbose=True)
