@@ -37,7 +37,11 @@ class Fraction:
         other.numerator *= -1
         return self.__add__(other)
 
-    #TODO write __mul__.  Verify __eq__ works with your code.
+    def __mul__(self, other):
+        numerator_result = self.numerator*other.numerator
+        denominator_result = self.denominator*other.denominator
+        return Fraction(numerator_result, denominator_result)
+
     #Optional have fun and overload other operators such as 
     # __sub__ for f-g
     # __gt__  for f > g
