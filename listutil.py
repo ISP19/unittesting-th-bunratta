@@ -9,7 +9,7 @@ class InvalidTypeException(Exception):
 
 
 def unique(lst):
-    """Return a list containing only the first occurrence of each distinct
+    """Returns a list containing only the first occurrence of each distinct
        element in list.  That is, all duplicates are omitted.
 
     Arguments:

@@ -14,7 +14,7 @@ class Fraction:
     """
     
     def __init__(self, numerator, denominator=1):
-        """Initialize a new fraction with the given numerator
+        """Initializes a new fraction with the given numerator
            and denominator (default 1).
         """
         self.is_infinity = False
@@ -29,7 +29,7 @@ class Fraction:
                 self.denominator *= -1
 
     def __add__(self, frac):
-        """Return the sum of two fractions as a new fraction.
+        """Returns the sum of two fractions as a new fraction.
            Use the standard formula  a/b + c/d = (ad+bc)/(b*d)
 
            Args:
@@ -42,7 +42,7 @@ class Fraction:
         return Fraction(numerator_result, denominator_product)
 
     def __sub__(self, other):
-        """Return the difference of two fractions as a new fraction.
+        """Returns the difference of two fractions as a new fraction.
             Args:
                 other (Fraction): Another fraction to subtract
 
@@ -56,8 +56,8 @@ class Fraction:
         """Returns the product of two fractions according to multiplication rule of fractions
            A fraction of which denominator of 0 will not be allowed unless it has a numerator of 1.
         Note:
-            1/0 represents a indeterminate form of positive infinity
-            -1/0 represents a indeterminate form of negative infinity
+            1/0 denotes a indeterminate form of positive infinity (math.inf).
+            -1/0 denotes a indeterminate form of negative infinity (math.inf).
         Args:
             other (Fraction): Another fraction to multiply
 
@@ -69,7 +69,7 @@ class Fraction:
         return Fraction(numerator_result, denominator_result)
 
     def to_decimal(self):
-        """Convert this fraction to its decimal equivalent
+        """Converts this fraction to its decimal equivalent
 
         Returns:
             float: The decimal representation
@@ -80,16 +80,20 @@ class Fraction:
     # __gt__  for f > g
     # __neg__ for -f (negation)
 
+    # TODO
     def __gt__(self, other):
         return self.to_decimal() > other.to_decimal()
 
+    # TODO
     def __lt__(self, other):
         return self.to_decimal() < other.to_decimal()
 
+    # TODO
     def __neg__(self):
         numerator = -self.numerator
         return Fraction(numerator, self.denominator)
 
+    # TODO
     def __eq__(self, frac):
         """Two fractions are equal if they have the same value.
            Fractions are stored in proper form so the internal representation
