@@ -43,10 +43,11 @@ Write a table describing your test cases.
 |Positive fraction multiplied by positive fraction|Multiplied positive fraction|
 |Negative fraction multiplied by positive fraction|Multiplied negative fraction|
 |Negative fraction multiplied by negative fraction|Multiplied positive fraction|
-### String representation of the object (str)
+### String representation and the constructor of the object (str and init)
 | Test case              |  Expected Result    |
 |------------------------|---------------------|
 |Fraction without denominator of 1 or 0|Fraction representation in "numerator/denominator"  e.g. 1/2, 1/3, -6/7|
 |Fraction with denominator of 1|Whole number with value equal to that of the numerator|
 |Fraction with denominator of 0|ZeroDivisionError raised|
-|Indeterminate form of 1/0 representation of infinity|ZeroDivisionError raised|
+|Indeterminate form of 1/0 or -1/0 as a representation of infinity|1/0 or -1/0, respectively|
+|Indeterminate form of 0/0|math.NaN|

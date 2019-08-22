@@ -9,6 +9,8 @@ class Fraction:
     Since Fractions are stored in proper form, each value has a
     unique representation, e.g. 4/5, 24/30, and -20/-25 have the same
     internal representation.
+
+    0/0 form is represented as NaN (short form of Not a Number)
     """
     
     def __init__(self, numerator, denominator=1):
@@ -17,11 +19,8 @@ class Fraction:
         """
         self.is_infinity = False
         gcd = math.gcd(numerator, denominator)
-        if denominator is 0:
-            if numerator is not 1 and numerator is not -1:
-                raise ValueError("A fraction cannot have a denominator of zero")
-            else:
-                self.is_infinity = True
+        if denominator is 0 and (numerator is -1 or numerator is 1):
+            self.is_infinity = True
         self.numerator = int(numerator / gcd)
         self.denominator = int(denominator / gcd)
         if self.denominator < 0 or self.numerator == 0:
@@ -54,9 +53,22 @@ class Fraction:
         denominator_result = self.denominator*other.denominator
         return Fraction(numerator_result, denominator_result)
 
+    def to_decimal(self):
+        return self.numerator/self.denominator
+
     # Optional have fun and overload other operators such as
     # __gt__  for f > g
     # __neg__ for -f (negation)
+
+    def __gt__(self, other):
+        return self.to_decimal() > other.to_decimal()
+
+    def __lt__(self, other):
+        return self.to_decimal() < other.to_decimal()
+
+    def __neg__(self):
+        numerator = -self.numerator
+        return Fraction(numerator, self.denominator)
 
     def __eq__(self, frac):
         """Two fractions are equal if they have the same value.
@@ -77,3 +89,16 @@ class Fraction:
             return f"{self.numerator}"
         else:
             return f"{self.numerator}/{self.denominator}"
+
+    def __new__(cls, numerator, denominator=1):
+        if denominator is 0:
+            if numerator is 0:
+                return math.nan
+            elif numerator is 1 or numerator is -1:
+                return numerator*math.inf
+            else:
+                raise ValueError("A fraction cannot have a denominator of zero")
+        elif denominator is 1:
+            return numerator
+        else:
+            return object.__new__(cls)
