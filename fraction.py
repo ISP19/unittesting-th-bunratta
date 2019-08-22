@@ -15,9 +15,13 @@ class Fraction:
         """Initialize a new fraction with the given numerator
            and denominator (default 1).
         """
+        self.is_infinity = False
         gcd = math.gcd(numerator, denominator)
-        if denominator == 0:
-            raise ValueError("A fraction cannot have a denominator of zero")
+        if denominator is 0:
+            if numerator is not 1 and numerator is not -1:
+                raise ValueError("A fraction cannot have a denominator of zero")
+            else:
+                self.is_infinity = True
         self.numerator = int(numerator / gcd)
         self.denominator = int(denominator / gcd)
         if self.denominator < 0 or self.numerator == 0:
@@ -38,12 +42,19 @@ class Fraction:
         return self.__add__(other)
 
     def __mul__(self, other):
+        """ Returns the product of two fractions according to multiplication rule of fractions
+            A fraction of which denominator of 0 will not be allowed unless it has a numerator of 1.
+        Note:
+            1/0 represents a indeterminate form of positive infinity
+            -1/0 represents a indeterminate form of negative infinity
+        :param other: Fraction
+        :return:
+        """
         numerator_result = self.numerator*other.numerator
         denominator_result = self.denominator*other.denominator
         return Fraction(numerator_result, denominator_result)
 
-    #Optional have fun and overload other operators such as 
-    # __sub__ for f-g
+    # Optional have fun and overload other operators such as
     # __gt__  for f > g
     # __neg__ for -f (negation)
 
@@ -52,9 +63,16 @@ class Fraction:
            Fractions are stored in proper form so the internal representation
            is unique (3/6 is the same as 1/2).
         """
-        return self.numerator/self.denominator == frac.numerator/frac.denominator
+        if self.is_infinity:
+            return False
+        else:
+            return self.numerator/self.denominator == frac.numerator/frac.denominator
 
     def __str__(self):
+        """ Represents fractions in terms of the numerator over denominator
+            The fraction of which denominator of 1 is represented in whole number instead.
+        :return:
+        """
         if self.denominator == 1:
             return f"{self.numerator}"
         else:

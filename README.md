@@ -49,3 +49,4 @@ Write a table describing your test cases.
 |Fraction without denominator of 1 or 0|Fraction representation in "numerator/denominator"  e.g. 1/2, 1/3, -6/7|
 |Fraction with denominator of 1|Whole number with value equal to that of the numerator|
 |Fraction with denominator of 0|ZeroDivisionError raised|
+|Indeterminate form of 1/0 representation of infinity|ZeroDivisionError raised|
