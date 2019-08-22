@@ -31,30 +31,50 @@ class Fraction:
     def __add__(self, frac):
         """Return the sum of two fractions as a new fraction.
            Use the standard formula  a/b + c/d = (ad+bc)/(b*d)
+
+           Args:
+               frac (Fraction): Another fraction to add
+           Returns:
+               Fraction: The summation of both operated fractions
         """
         numerator_result = (self.numerator*frac.denominator) + (frac.numerator*self.denominator)
         denominator_product = self.denominator*frac.denominator
         return Fraction(numerator_result, denominator_product)
 
     def __sub__(self, other):
+        """Return the difference of two fractions as a new fraction.
+            Args:
+                other (Fraction): Another fraction to subtract
+
+            Returns:
+                Fraction: The difference result of both operated fractions
+        """
         other.numerator *= -1
         return self.__add__(other)
 
     def __mul__(self, other):
-        """ Returns the product of two fractions according to multiplication rule of fractions
-            A fraction of which denominator of 0 will not be allowed unless it has a numerator of 1.
+        """Returns the product of two fractions according to multiplication rule of fractions
+           A fraction of which denominator of 0 will not be allowed unless it has a numerator of 1.
         Note:
             1/0 represents a indeterminate form of positive infinity
             -1/0 represents a indeterminate form of negative infinity
-        :param other: Fraction
-        :return:
+        Args:
+            other (Fraction): Another fraction to multiply
+
+        Returns:
+            Fraction: The product of both operated fractions
         """
         numerator_result = self.numerator*other.numerator
         denominator_result = self.denominator*other.denominator
         return Fraction(numerator_result, denominator_result)
 
     def to_decimal(self):
-        return self.numerator/self.denominator
+        """Convert this fraction to its decimal equivalent
+
+        Returns:
+            float: The decimal representation
+        """
+        return float(self.numerator/self.denominator)
 
     # Optional have fun and overload other operators such as
     # __gt__  for f > g
@@ -81,9 +101,10 @@ class Fraction:
             return self.numerator/self.denominator == frac.numerator/frac.denominator
 
     def __str__(self):
-        """ Represents fractions in terms of the numerator over denominator
-            The fraction of which denominator of 1 is represented in whole number instead.
-        :return:
+        """Represents fractions in terms of the numerator over denominator
+        The fraction of which denominator of 1 is represented in whole number instead.
+        Returns:
+            str: A string representation of a Fraction
         """
         if self.denominator == 1:
             return f"{self.numerator}"
