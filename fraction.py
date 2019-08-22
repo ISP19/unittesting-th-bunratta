@@ -10,7 +10,11 @@ class Fraction:
     unique representation, e.g. 4/5, 24/30, and -20/-25 have the same
     internal representation.
 
-    0/0 form is represented as NaN (short form of Not a Number)
+
+     Note:
+         0/0 form is represented as NaN (short form of Not a Number)
+         1/0 denotes a indeterminate form of positive infinity (math.inf).
+         -1/0 denotes a indeterminate form of negative infinity (-math.inf).
     """
     
     def __init__(self, numerator, denominator=1):
@@ -55,9 +59,7 @@ class Fraction:
     def __mul__(self, other):
         """Returns the product of two fractions according to multiplication rule of fractions
            A fraction of which denominator of 0 will not be allowed unless it has a numerator of 1.
-        Note:
-            1/0 denotes a indeterminate form of positive infinity (math.inf).
-            -1/0 denotes a indeterminate form of negative infinity (math.inf).
+
         Args:
             other (Fraction): Another fraction to multiply
 
@@ -80,20 +82,20 @@ class Fraction:
     # __gt__  for f > g
     # __neg__ for -f (negation)
 
-    # TODO
+    # TODO: Add tests for this one
     def __gt__(self, other):
         return self.to_decimal() > other.to_decimal()
 
-    # TODO
+    # TODO: Add tests for this one
     def __lt__(self, other):
         return self.to_decimal() < other.to_decimal()
 
-    # TODO
+    # TODO: Add tests for this one
     def __neg__(self):
         numerator = -self.numerator
         return Fraction(numerator, self.denominator)
 
-    # TODO
+    # TODO: Add more tests for this one
     def __eq__(self, frac):
         """Two fractions are equal if they have the same value.
            Fractions are stored in proper form so the internal representation
@@ -102,11 +104,12 @@ class Fraction:
         if self.is_infinity:
             return False
         else:
-            return self.numerator/self.denominator == frac.numerator/frac.denominator
+            return self.to_decimal() == frac.to_decimal()
 
     def __str__(self):
         """Represents fractions in terms of the numerator over denominator
         The fraction of which denominator of 1 is represented in whole number instead.
+
         Returns:
             str: A string representation of a Fraction
         """
