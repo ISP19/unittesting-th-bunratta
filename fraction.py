@@ -78,17 +78,43 @@ class Fraction:
         """
         return float(self.numerator/self.denominator)
 
-    # Optional have fun and overload other operators such as
-    # __gt__  for f > g
-    # __neg__ for -f (negation)
+    @classmethod
+    def to_comparable(cls, obj):
+        """Convert the given number into its comparable form
+
+        Args:
+            obj: The given number
+
+        Returns:
+            any: The given object in its comparable form
+        """
+        if type(obj) != cls:
+            return obj
+        else:
+            return obj.to_decimal()
+
+    @classmethod
+    def from_str(cls, frac_str: str):
+        """Converts a fraction representation into a Fraction object
+
+        Args:
+            frac_str (str): A fraction representation to convert
+
+        Returns:
+            Fraction: The parsed result from string representation
+        """
+        if "/" not in frac_str:
+            raise ValueError("Invalid fraction representation")
+        numerator, denominator = frac_str.split("/")
+        return Fraction(int(numerator), int(denominator))
 
     # TODO: Add tests for this one
     def __gt__(self, other):
-        return self.to_decimal() > other.to_decimal()
+        return self.to_decimal() > Fraction.to_comparable(other)
 
     # TODO: Add tests for this one
     def __lt__(self, other):
-        return self.to_decimal() < other.to_decimal()
+        return self.to_decimal() < Fraction.to_comparable(other)
 
     # TODO: Add tests for this one
     def __neg__(self):
@@ -104,7 +130,10 @@ class Fraction:
         if self.is_infinity:
             return False
         else:
-            return self.to_decimal() == frac.to_decimal()
+            if type(frac) == int:
+                return self.numerator == frac
+            else:
+                return self.to_decimal() == Fraction.to_comparable(frac)
 
     def __str__(self):
         """Represents fractions in terms of the numerator over denominator

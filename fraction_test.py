@@ -16,7 +16,10 @@ class FractionTest(unittest.TestCase):
         self.assertEqual(math.inf, Fraction(1, 0))
         self.assertEqual(-math.inf, Fraction(-1, 0))
         try:
-            self.assertRaises(ValueError, Fraction(8, 0))
+            with self.assertRaises(ValueError):
+                Fraction(8, 0)
+                Fraction(-9, 0)
+                Fraction(11, -0)
         except ValueError:
             pass
 
@@ -40,6 +43,11 @@ class FractionTest(unittest.TestCase):
         # Constructor should provide default denominator = 1
         f = Fraction(99)
         self.assertEqual("99", f.__str__())
+        f = Fraction(10, 1)
+        self.assertEqual("10", f.__str__())
+
+        f = Fraction(0, 0)
+        self.assertEqual("nan", f.__str__())
 
     def test_add(self):
         self.assertTrue(Fraction(3, 4) == Fraction(1, 12) + Fraction(2, 3))
@@ -60,20 +68,34 @@ class FractionTest(unittest.TestCase):
         self.assertEqual(Fraction(10, -16), -Fraction(10, 16))
 
     def test_lt(self):
-        pass
+        self.assertTrue(Fraction(8, 8) < Fraction(9, 8))
+        self.assertTrue(Fraction(-10, 10) < Fraction(1))
+        self.assertTrue(Fraction(-15, 16) < Fraction(15, 16))
+        self.assertTrue(Fraction(27, 28) < Fraction(28, 29))
 
     def test_gt(self):
-        pass
+        self.assertTrue(Fraction(1, 2) > Fraction(1, 4))
+        self.assertTrue(Fraction(4, 5) > Fraction(3, 4))
+        self.assertTrue(Fraction(5, 9) > Fraction(1, 3))
+
+    def test_from_str(self):
+        self.assertEqual(Fraction(1, 8), Fraction.from_str("1/8"))
+        self.assertEqual(math.inf, Fraction.from_str("1/0"))
+        self.assertEqual(-math.inf, Fraction.from_str("-1/0"))
 
     def test_eq(self):
+        one = Fraction(1)
         f = Fraction(1, 2)
         g = Fraction(-40, -80)
         h = Fraction(10000, 20001)  # not quite 1/2
         i = Fraction(0, 3)
         j = Fraction(0, 6)
+        k = Fraction(10, 10)
         self.assertTrue(f == g)
         self.assertTrue(f.__eq__(g))  # same thing
         self.assertFalse(f == h)
         self.assertFalse(f.__eq__(h))
         self.assertTrue(i == j)
         self.assertTrue(i.__eq__(j))
+        self.assertTrue(one == k)
+        self.assertTrue(one.__eq__(k))
