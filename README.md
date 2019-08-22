@@ -23,6 +23,7 @@ Write a table describing your test cases.
 ### Equality operator (```==```)
 | Test case              |  Expected Result    |
 |------------------------|---------------------|
+|Fraction instance of a whole number and an integer of the same value|Equal|
 |Pairs of fractions of positive numerator and denominator and their respective reduced form |Equal|
 |Pairs of fractions of negative numerator and denominator and their respective reduced form |Equal|
 |Pairs of fractions of numerator and denominator and their negative reduced form |Equal|

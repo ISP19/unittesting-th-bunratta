@@ -130,7 +130,7 @@ class Fraction:
         if self.is_infinity:
             return False
         else:
-            if type(frac) == int:
+            if type(frac) is int:
                 return self.numerator == frac
             else:
                 return self.to_decimal() == Fraction.to_comparable(frac)
@@ -142,7 +142,7 @@ class Fraction:
         Returns:
             str: A string representation of a Fraction
         """
-        if self.denominator == 1:
+        if self.denominator is 1:
             return f"{self.numerator}"
         else:
             return f"{self.numerator}/{self.denominator}"

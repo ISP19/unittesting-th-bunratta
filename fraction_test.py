@@ -48,12 +48,21 @@ class FractionTest(unittest.TestCase):
 
         f = Fraction(0, 0)
         self.assertEqual("nan", f.__str__())
+        f = Fraction(1, 0)
+        self.assertEqual("inf", f.__str__())
+        f = Fraction(-1, 0)
+        self.assertEqual("-inf", f.__str__())
 
     def test_add(self):
         self.assertTrue(Fraction(3, 4) == Fraction(1, 12) + Fraction(2, 3))
         self.assertTrue(Fraction(-1, 16) == Fraction(1, 16) + Fraction(-2, 16))
         self.assertTrue(Fraction(-8, 9) == Fraction(-7, 9) + Fraction(-1, 9))
         self.assertTrue(Fraction(-8, 28) == Fraction(7, -28) + Fraction(1, -28))
+
+    def test_sub(self):
+        self.assertTrue(Fraction(-1, 16) == Fraction(1, 16) - Fraction(2, 16))
+        self.assertTrue(Fraction(-8, 9) == Fraction(-7, 9) - Fraction(1, 9))
+        self.assertTrue(Fraction(-8, 28) == Fraction(7, -28) - Fraction(1, 28))
 
     def test_mul(self):
         self.assertEqual(Fraction(0), Fraction(-5, 9) * Fraction(0, 6))
@@ -66,6 +75,8 @@ class FractionTest(unittest.TestCase):
     def test_neg(self):
         self.assertEqual(Fraction(-7, 8), -Fraction(7, 8))
         self.assertEqual(Fraction(10, -16), -Fraction(10, 16))
+        self.assertEqual(Fraction(9, 10), -Fraction(-9, 10))
+        self.assertEqual(Fraction(10, 112), -Fraction(-10, 112))
 
     def test_lt(self):
         self.assertTrue(Fraction(8, 8) < Fraction(9, 8))
@@ -80,8 +91,10 @@ class FractionTest(unittest.TestCase):
 
     def test_from_str(self):
         self.assertEqual(Fraction(1, 8), Fraction.from_str("1/8"))
+        self.assertEqual(1, Fraction.from_str("112/112"))
         self.assertEqual(math.inf, Fraction.from_str("1/0"))
         self.assertEqual(-math.inf, Fraction.from_str("-1/0"))
+        self.assertTrue(math.isnan(Fraction.from_str("0/0")))
 
     def test_eq(self):
         one = Fraction(1)
@@ -99,3 +112,4 @@ class FractionTest(unittest.TestCase):
         self.assertTrue(i.__eq__(j))
         self.assertTrue(one == k)
         self.assertTrue(one.__eq__(k))
+        self.assertTrue(one == 1)
