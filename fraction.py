@@ -108,20 +108,16 @@ class Fraction:
         numerator, denominator = frac_str.split("/")
         return Fraction(int(numerator), int(denominator))
 
-    # TODO: Add tests for this one
     def __gt__(self, other):
         return self.to_decimal() > Fraction.to_comparable(other)
 
-    # TODO: Add tests for this one
     def __lt__(self, other):
         return self.to_decimal() < Fraction.to_comparable(other)
 
-    # TODO: Add tests for this one
     def __neg__(self):
         numerator = -self.numerator
         return Fraction(numerator, self.denominator)
 
-    # TODO: Add more tests for this one
     def __eq__(self, frac):
         """Two fractions are equal if they have the same value.
            Fractions are stored in proper form so the internal representation

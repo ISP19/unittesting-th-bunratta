@@ -80,6 +80,7 @@ class FractionTest(unittest.TestCase):
 
     def test_lt(self):
         self.assertTrue(Fraction(8, 8) < Fraction(9, 8))
+        self.assertTrue(Fraction(-112, 112) < 0)
         self.assertTrue(Fraction(-10, 10) < Fraction(1))
         self.assertTrue(Fraction(-15, 16) < Fraction(15, 16))
         self.assertTrue(Fraction(27, 28) < Fraction(28, 29))
@@ -88,6 +89,9 @@ class FractionTest(unittest.TestCase):
         self.assertTrue(Fraction(1, 2) > Fraction(1, 4))
         self.assertTrue(Fraction(4, 5) > Fraction(3, 4))
         self.assertTrue(Fraction(5, 9) > Fraction(1, 3))
+        self.assertTrue(Fraction(10, 112) > Fraction(-10, 112))
+        self.assertTrue(Fraction(10, 112) > Fraction(10, -112))
+        self.assertTrue(Fraction(8) > Fraction(-8))
 
     def test_from_str(self):
         self.assertEqual(Fraction(1, 8), Fraction.from_str("1/8"))
