@@ -34,17 +34,24 @@ class Fraction:
                 self.numerator *= -1
                 self.denominator *= -1
 
-    def __add__(self, frac):
+    def __add__(self, other):
         """Returns the sum of two fractions as a new fraction.
            Use the standard formula  a/b + c/d = (ad+bc)/(b*d)
 
            Args:
-               frac (Fraction): Another fraction to add
+               other (Fraction): Another fraction to add
            Returns:
                Fraction: The summation of both operated fractions
         """
-        numerator_result = (self.numerator*frac.denominator) + (frac.numerator*self.denominator)
-        denominator_product = self.denominator*frac.denominator
+        if type(other) is not Fraction:
+            if math.isinf(other):
+                return other
+            else:
+                numerator_result = self.numerator + (other*self.denominator)
+                denominator_product = self.denominator
+        else:
+            numerator_result = (self.numerator*other.denominator) + (other.numerator*self.denominator)
+            denominator_product = self.denominator*other.denominator
         return Fraction(numerator_result, denominator_product)
 
     def __sub__(self, other):
@@ -55,8 +62,11 @@ class Fraction:
             Returns:
                 Fraction: The difference result of both operated fractions
         """
-        other.numerator *= -1
-        return self.__add__(other)
+        if type(other) is Fraction:
+            other.numerator *= -1
+            return self.__add__(other)
+        else:
+            return self.__add__(-other)
 
     def __mul__(self, other):
         """Returns the product of two fractions according to multiplication rule of fractions
@@ -111,12 +121,34 @@ class Fraction:
         return Fraction(int(numerator), int(denominator))
 
     def __gt__(self, other):
+        """Compares two fractions whether the first fraction is greater than the other or else.
+
+        Args:
+            other: Another fraction to compare with
+
+        Returns:
+            bool: Whether the first fraction is greater than the other or not
+        """
         return self.to_decimal() > Fraction.to_comparable(other)
 
     def __lt__(self, other):
+        """Compares two fractions whether the first fraction is less than the other or else.
+
+        Args:
+            other: Another fraction to compare with
+
+        Returns:
+            bool: Whether the first fraction is less than the other or not
+        """
         return self.to_decimal() < Fraction.to_comparable(other)
 
     def __neg__(self):
+        """Negates this fraction's sign from positive to negative
+          and negative to positive
+
+        Returns:
+            bool: A negation form of the Fraction (as a new one)
+        """
         numerator = -self.numerator
         return Fraction(numerator, self.denominator)
 

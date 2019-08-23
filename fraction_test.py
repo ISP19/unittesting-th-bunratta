@@ -60,11 +60,15 @@ class FractionTest(unittest.TestCase):
         self.assertTrue(Fraction(-1, 16) == Fraction(1, 16) + Fraction(-2, 16))
         self.assertTrue(Fraction(-8, 9) == Fraction(-7, 9) + Fraction(-1, 9))
         self.assertTrue(Fraction(-8, 28) == Fraction(7, -28) + Fraction(1, -28))
+        self.assertTrue(math.inf == Fraction(10, 112) + Fraction(1, 0))
+        self.assertTrue(-math.inf == Fraction(10, 112) + Fraction(-1, 0))
 
     def test_sub(self):
         self.assertTrue(Fraction(-1, 16) == Fraction(1, 16) - Fraction(2, 16))
         self.assertTrue(Fraction(-8, 9) == Fraction(-7, 9) - Fraction(1, 9))
         self.assertTrue(Fraction(-8, 28) == Fraction(7, -28) - Fraction(1, 28))
+        self.assertTrue(Fraction(10, 112) == Fraction(10, 112) - Fraction(0))
+        self.assertTrue(Fraction(10, 112) == Fraction(10, 112) - 0)
 
     def test_mul(self):
         self.assertEqual(Fraction(0), Fraction(-5, 9) * Fraction(0, 6))
@@ -79,8 +83,13 @@ class FractionTest(unittest.TestCase):
         self.assertEqual(Fraction(10, -16), -Fraction(10, 16))
         self.assertEqual(Fraction(9, 10), -Fraction(-9, 10))
         self.assertEqual(Fraction(10, 112), -Fraction(-10, 112))
+        self.assertEqual(-math.inf, -Fraction(1, 0))
+        self.assertEqual(math.inf, -Fraction(-1, 0))
+        # Double negation
+        self.assertEqual(math.inf, -(-Fraction(1, 0)))
 
     def test_lt(self):
+        self.assertTrue(Fraction(-1, 2) > Fraction(-2, 3))
         self.assertTrue(Fraction(8, 8) < Fraction(9, 8))
         self.assertTrue(Fraction(-112, 112) < 0)
         self.assertTrue(Fraction(-10, 10) < Fraction(1))
@@ -90,10 +99,12 @@ class FractionTest(unittest.TestCase):
     def test_gt(self):
         self.assertTrue(Fraction(1, 2) > Fraction(1, 4))
         self.assertTrue(Fraction(4, 5) > Fraction(3, 4))
+        self.assertTrue(Fraction(-4, 5) > Fraction(-5, 6))
         self.assertTrue(Fraction(5, 9) > Fraction(1, 3))
         self.assertTrue(Fraction(10, 112) > Fraction(-10, 112))
         self.assertTrue(Fraction(10, 112) > Fraction(10, -112))
         self.assertTrue(Fraction(8) > Fraction(-8))
+        self.assertTrue(Fraction(3, 2) > 0)
 
     def test_from_str(self):
         self.assertEqual(Fraction(1, 8), Fraction.from_str("1/8"))
