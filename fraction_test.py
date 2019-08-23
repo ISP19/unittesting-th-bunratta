@@ -20,6 +20,8 @@ class FractionTest(unittest.TestCase):
                 Fraction(8, 0)
                 Fraction(-9, 0)
                 Fraction(11, -0)
+                Fraction(0.1, 0.8)
+                Fraction(3.14, 3.14)
         except ValueError:
             pass
 

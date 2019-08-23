@@ -21,6 +21,8 @@ class Fraction:
         """Initializes a new fraction with the given numerator
            and denominator (default 1).
         """
+        if type(numerator) is not int or type(denominator) is not int:
+            raise ValueError("The numerator or denominator of a fraction must be an integer.")
         self.is_infinity = False
         gcd = math.gcd(numerator, denominator)
         if denominator is 0 and (numerator is -1 or numerator is 1):
