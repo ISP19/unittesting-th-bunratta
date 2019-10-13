@@ -2,6 +2,7 @@
 
 by T. Bunratta.
 
+[![Build Status](https://travis-ci.com/th-bunratta/unittesting-th-bunratta.svg?branch=master)](https://travis-ci.com/th-bunratta)
 
 ## Test Cases for ```unique```
 
