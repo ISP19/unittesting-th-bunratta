@@ -15,15 +15,12 @@ class FractionTest(unittest.TestCase):
         self.assertTrue(math.isnan(Fraction(0, 0)))
         self.assertEqual(math.inf, Fraction(1, 0))
         self.assertEqual(-math.inf, Fraction(-1, 0))
-        try:
-            with self.assertRaises(ValueError):
-                Fraction(8, 0)
-                Fraction(-9, 0)
-                Fraction(11, -0)
-                Fraction(0.1, 0.8)
-                Fraction(3.14, 3.14)
-        except ValueError:
-            pass
+        with self.assertRaises(ValueError):
+            Fraction(8, 0)
+            Fraction(-9, 0)
+            Fraction(11, -0)
+            Fraction(0.1, 0.8)
+            Fraction(3.14, 3.14)
 
     def test_str(self):
         f = Fraction(3, -1)
