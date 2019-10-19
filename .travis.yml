@@ -8,9 +8,12 @@ git:
 install:
   - pip install codecov
 
+env:
+  - CODECOV_TOKEN="182b5d75-4813-495e-a89c-601d3b516ef9"
+
 script:
+ - export
  - python -m unittest discover -p "*_test.py"
 
 after_success:
   - codecov
-  -
