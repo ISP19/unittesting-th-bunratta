@@ -2,6 +2,7 @@
 
 by T. Bunratta.
 
+[![codecov](https://codecov.io/gh/th-bunratta/unittesting-th-bunratta/branch/master/graph/badge.svg)](https://codecov.io/gh/th-bunratta/unittesting-th-bunratta)
 [![Build Status](https://travis-ci.com/th-bunratta/unittesting-th-bunratta.svg?branch=master)](https://travis-ci.com/th-bunratta)
 
 ## Test Cases for ```unique```
