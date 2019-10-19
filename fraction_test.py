@@ -127,3 +127,7 @@ class FractionTest(unittest.TestCase):
         self.assertTrue(one == k)
         self.assertTrue(one.__eq__(k))
         self.assertTrue(one == 1)
+
+
+if __name__ == "__main__":
+    unittest.main()

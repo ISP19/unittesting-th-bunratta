@@ -1,5 +1,4 @@
 [run]
 branch = True
-cover_pylib = False
 include =
-    *_test.py
+    fraction_test.py
