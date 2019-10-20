@@ -25,8 +25,6 @@ class Fraction:
             raise ValueError("The numerator or denominator of a fraction must be an integer.")
         self.is_infinity = False
         gcd = math.gcd(numerator, denominator)
-        if denominator is 0 and (numerator is -1 or numerator is 1):
-            self.is_infinity = True
         self.numerator = int(numerator / gcd)
         self.denominator = int(denominator / gcd)
         if self.denominator < 0 or self.numerator == 0:
@@ -157,13 +155,10 @@ class Fraction:
            Fractions are stored in proper form so the internal representation
            is unique (3/6 is the same as 1/2).
         """
-        if self.is_infinity:
-            return False
+        if type(frac) is int:
+            return self.numerator == frac
         else:
-            if type(frac) is int:
-                return self.numerator == frac
-            else:
-                return self.to_decimal() == Fraction.to_comparable(frac)
+            return self.to_decimal() == Fraction.to_comparable(frac)
 
     def __str__(self):
         """Represents fractions in terms of the numerator over denominator

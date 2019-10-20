@@ -19,7 +19,11 @@ class FractionTest(unittest.TestCase):
             Fraction(8, 0)
             Fraction(-9, 0)
             Fraction(11, -0)
+
+        with self.assertRaises(ValueError):
             Fraction(0.1, 0.8)
+
+        with self.assertRaises(ValueError):
             Fraction(3.14, 3.14)
 
     def test_str(self):
@@ -109,15 +113,20 @@ class FractionTest(unittest.TestCase):
         self.assertEqual(math.inf, Fraction.from_str("1/0"))
         self.assertEqual(-math.inf, Fraction.from_str("-1/0"))
         self.assertTrue(math.isnan(Fraction.from_str("0/0")))
+        with self.assertRaises(ValueError):
+            Fraction.from_str("112")
 
     def test_eq(self):
         one = Fraction(1)
+        inf = Fraction(1, 0)
         f = Fraction(1, 2)
         g = Fraction(-40, -80)
         h = Fraction(10000, 20001)  # not quite 1/2
         i = Fraction(0, 3)
         j = Fraction(0, 6)
         k = Fraction(10, 10)
+        self.assertTrue(inf == math.inf)
+        self.assertTrue(inf.__eq__(math.inf))
         self.assertTrue(f == g)
         self.assertTrue(f.__eq__(g))  # same thing
         self.assertFalse(f == h)
